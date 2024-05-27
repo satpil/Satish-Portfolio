@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Head } from "next/document";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import StyledComponentsRegistry from "@/lib/registry";
+import { StyleProvider } from "@ant-design/cssinjs";
+import StyleLayout from "./stylelayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +21,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <AntdRegistry>
+          <StyledComponentsRegistry>
+            <StyleLayout>
+              {children}
+              </StyleLayout>
+          </StyledComponentsRegistry>
+        </AntdRegistry>
+      </body>
     </html>
   );
 }
